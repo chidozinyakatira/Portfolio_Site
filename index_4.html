@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chido Zinyakatira — Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #f4f1ec;
+  --surface:    #eae6df;
+  --surface2:   #ddd8cf;
+  --border:     rgba(20,40,80,0.1);
+  --border-h:   rgba(30,58,138,0.35);
+  --navy:       #1e3a8a;
+  --navy-lt:    #2563eb;
+  --navy-dim:   rgba(30,58,138,0.08);
+  --ink:        #111827;
+  --text:       #374151;
+  --muted:      #6b7280;
+  --muted2:     #9ca3af;
+  --fd: 'Unbounded', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--fb);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--navy); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 0 6vw; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(244,241,236,0.93);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--fm); font-size: 11px; color: var(--navy); letter-spacing: 0.18em; text-transform: uppercase; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-family: var(--fm); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta { font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--navy); color: #fff; padding: 8px 18px; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--navy-lt); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding: 60px 6vw 8vh;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: flex-end; position: relative; overflow: hidden;
+  background: var(--bg);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(30,58,138,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(30,58,138,0.055) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: radial-gradient(ellipse 85% 85% at 38% 58%, black 15%, transparent 80%);
+}
+.hero-glow { position: absolute; top: 25%; left: 10%; pointer-events: none; width: 520px; height: 520px; background: radial-gradient(circle, rgba(30,58,138,0.06) 0%, transparent 70%); }
+.hero-main { position: relative; z-index: 2; }
+.hero-eyebrow { font-family: var(--fm); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--navy); display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; animation: fadeUp 0.7s ease both 0.15s; }
+.hero-eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--navy); }
+.hero-name { font-family: var(--fd); font-size: clamp(3.6rem,9vw,9.5rem); font-weight: 900; line-height: 0.88; letter-spacing: -0.03em; color: var(--ink); animation: fadeUp 0.8s ease both 0.3s; }
+.hero-name .accent { color: var(--navy); display: block; }
+.hero-tagline { font-size: clamp(0.95rem,1.5vw,1.15rem); color: var(--muted); max-width: 480px; margin-top: 2.5rem; font-weight: 300; line-height: 1.75; animation: fadeUp 0.8s ease both 0.45s; }
+.hero-ctas { display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; animation: fadeUp 0.8s ease both 0.6s; }
+.btn-navy { background: var(--navy); color: #fff; font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 28px; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
+.btn-navy:hover { background: var(--navy-lt); transform: translateY(-2px); }
+.btn-outline { border: 1px solid rgba(30,58,138,0.3); color: var(--navy); font-family: var(--fm); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 28px; text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s; }
+.btn-outline:hover { border-color: var(--navy); background: var(--navy-dim); }
+.hero-stats { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 2.5rem; align-items: flex-end; animation: fadeIn 1s ease both 0.9s; }
+.hero-stat-num { font-family: var(--fd); font-size: 2.4rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.hero-stat-label { font-family: var(--fm); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 5px; text-align: right; }
+.hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--fm); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted2); animation: fadeIn 1s ease both 1.4s; }
+.scroll-bar { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--navy), transparent); animation: pulse 2s ease-in-out infinite; }
+
+/* SECTION SHARED */
+section { padding: 7rem 6vw; }
+.s-label { font-family: var(--fm); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.6rem; }
+.s-title { font-family: var(--fd); font-size: clamp(2rem,4vw,3rem); font-weight: 700; color: var(--ink); line-height: 1.05; letter-spacing: -0.025em; }
+.sec-hdr { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+.sec-hdr-link { font-family: var(--fm); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.sec-hdr-link:hover { color: var(--navy); }
+
+/* ABOUT */
+#about { background: var(--surface); }
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+.about-text p { color: var(--muted); font-size: 1.05rem; font-weight: 300; margin-bottom: 1.3rem; line-height: 1.8; }
+.about-text p strong { color: var(--text); font-weight: 500; }
+.meta-row { display: grid; grid-template-columns: 130px 1fr; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.meta-key { font-family: var(--fm); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted2); padding-top: 3px; }
+.meta-val { font-size: 0.88rem; color: var(--text); }
+.meta-val a { color: var(--navy); text-decoration: none; }
+.meta-val a:hover { text-decoration: underline; }
+
+/* SKILLS */
+#skills { background: var(--bg); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.skill-group { background: var(--bg); padding: 2rem; transition: background 0.25s; }
+.skill-group:hover { background: var(--surface); }
+.sg-icon { font-size: 1.3rem; margin-bottom: 0.8rem; }
+.sg-title { font-family: var(--fd); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 1rem; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag { font-family: var(--fm); font-size: 9.5px; padding: 4px 10px; border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
+.skill-tag:hover { border-color: var(--navy); color: var(--navy); }
+
+/* PROJECTS */
+#projects { background: var(--surface); }
+
+.feat-card { border: 1px solid var(--border); margin-bottom: 2px; background: var(--bg); transition: border-color 0.3s; overflow: hidden; }
+.feat-card:hover { border-color: var(--border-h); }
+.fc-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 280px; }
+.fc-content { padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; border-right: 1px solid var(--border); }
+.fc-visual { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem; background: var(--surface); }
+.fc-num { font-family: var(--fm); font-size: 9px; color: var(--navy); letter-spacing: 0.15em; opacity: 0.5; }
+.fc-title { font-family: var(--fd); font-size: 1.25rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; }
+.fc-desc { font-size: 0.875rem; color: var(--muted); font-weight: 300; line-height: 1.75; flex: 1; }
+.fc-meta { display: flex; flex-direction: column; gap: 0.8rem; }
+.fc-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.stack-pill { font-family: var(--fm); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--navy-dim); color: var(--navy); padding: 3px 10px; }
+.fc-links { display: flex; gap: 1.5rem; }
+.plink { font-family: var(--fm); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.plink:hover { color: var(--navy); }
+
+.badge { font-family: var(--fm); font-size: 8.5px; padding: 2px 9px; letter-spacing: 0.08em; text-transform: uppercase; display: inline-block; }
+.b-res { background: rgba(109,40,217,0.08); color: #7c3aed; border: 1px solid rgba(109,40,217,0.2); }
+.b-cmp { background: var(--navy-dim); color: var(--navy); border: 1px solid rgba(30,58,138,0.2); }
+.b-eng { background: rgba(5,150,105,0.08); color: #059669; border: 1px solid rgba(5,150,105,0.2); }
+
+.vis-label { font-family: var(--fm); font-size: 9px; color: var(--muted2); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.pipeline { display: flex; align-items: center; font-family: var(--fm); font-size: 8.5px; letter-spacing: 0.05em; overflow-x: auto; padding: 0.25rem 0; }
+.pnode { background: var(--bg); border: 1px solid var(--border); padding: 7px 10px; color: var(--muted); white-space: nowrap; flex-shrink: 0; text-align: center; }
+.pnode.hi { border-color: var(--navy); color: var(--navy); }
+.parr { color: var(--muted2); padding: 0 5px; font-size: 10px; flex-shrink: 0; }
+.pstat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-family: var(--fm); font-size: 9px; }
+.pstat:last-child { border-bottom: none; }
+.pstat-k { color: var(--muted); }
+.pstat-v { color: var(--navy); font-weight: 500; }
+
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2px; }
+.pcard { background: var(--bg); padding: 2.2rem; display: flex; flex-direction: column; gap: 0.85rem; position: relative; overflow: hidden; transition: background 0.25s; }
+.pcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--navy); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.pcard:hover { background: var(--surface); }
+.pcard:hover::before { transform: scaleX(1); }
+.pc-num { font-family: var(--fm); font-size: 9px; color: var(--navy); letter-spacing: 0.12em; opacity: 0.45; }
+.pc-title { font-family: var(--fd); font-size: 0.92rem; font-weight: 700; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; }
+.pc-tools { font-family: var(--fm); font-size: 9px; color: var(--muted2); letter-spacing: 0.07em; text-transform: uppercase; }
+.pc-desc { font-size: 0.83rem; color: var(--muted); font-weight: 300; line-height: 1.7; flex: 1; }
+.pc-finds { border-left: 2px solid rgba(30,58,138,0.2); padding-left: 0.75rem; }
+.pc-finds li { font-size: 0.78rem; color: var(--muted); font-weight: 300; list-style: none; padding: 2px 0; line-height: 1.5; }
+.pc-finds li::before { content: '↗ '; color: var(--navy); font-size: 9px; }
+.pc-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+
+/* EXPERIENCE */
+#experience { background: var(--bg); }
+.exp-item { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+.exp-date { font-family: var(--fm); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.exp-date strong { color: var(--navy); display: block; font-size: 11px; margin-bottom: 4px; }
+.exp-role { font-family: var(--fd); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+.exp-co { font-family: var(--fm); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 1.2rem; }
+.exp-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.exp-list li { font-size: 0.875rem; color: var(--muted); font-weight: 300; list-style: none; padding-left: 1.2rem; position: relative; line-height: 1.65; }
+.exp-list li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 1px; background: var(--navy); }
+
+/* EDUCATION */
+#education { background: var(--surface); }
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.edu-card { background: var(--bg); padding: 2.2rem; display: flex; flex-direction: column; gap: 0.7rem; transition: background 0.25s; }
+.edu-card:hover { background: var(--surface2); }
+.edu-inst { font-family: var(--fm); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); }
+.edu-deg { font-family: var(--fd); font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.25; letter-spacing: -0.01em; }
+.edu-period { font-family: var(--fm); font-size: 9px; color: var(--muted); letter-spacing: 0.08em; }
+.edu-badge { font-family: var(--fm); font-size: 9px; background: var(--navy-dim); color: var(--navy); padding: 3px 10px; align-self: flex-start; letter-spacing: 0.06em; display: inline-block; }
+.edu-list { display: flex; flex-direction: column; gap: 3px; margin-top: 0.4rem; }
+.edu-list li { font-size: 0.8rem; color: var(--muted); font-weight: 300; list-style: none; padding-left: 1rem; position: relative; line-height: 1.5; }
+.edu-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 4px; height: 1px; background: var(--navy); }
+
+/* CERTIFICATIONS */
+#certifications { background: var(--bg); }
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.cert-card { background: var(--bg); padding: 1.8rem 2rem; display: flex; flex-direction: column; gap: 0.5rem; transition: background 0.25s; }
+.cert-card:hover { background: var(--surface); }
+.cert-issuer { font-family: var(--fm); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
+.cert-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); line-height: 1.3; }
+.cert-date { font-family: var(--fm); font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+
+/* CONTACT */
+#contact { background: var(--surface); }
+.contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6rem; align-items: start; }
+.contact-text p { color: var(--muted); font-weight: 300; line-height: 1.8; font-size: 1.05rem; margin-bottom: 1rem; }
+.contact-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.clinks { display: flex; flex-direction: column; }
+.clink { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: border-color 0.2s; }
+.clink:hover { border-color: var(--border-h); }
+.clink-left { display: flex; flex-direction: column; gap: 3px; }
+.clink-lbl { font-family: var(--fm); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+.clink:hover .clink-lbl { color: var(--navy); }
+.clink-val { font-size: 0.875rem; color: var(--text); transition: color 0.2s; }
+.clink:hover .clink-val { color: var(--navy); }
+.clink-arr { color: var(--muted2); font-size: 14px; transition: transform 0.2s, color 0.2s; }
+.clink:hover .clink-arr { color: var(--navy); transform: translateX(4px); }
+
+/* FOOTER */
+footer { padding: 2rem 6vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--bg); }
+.footer-copy { font-family: var(--fm); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-family: var(--fm); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--navy); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: row; justify-content: flex-start; margin-top: 3rem; }
+  .hero-stat-label { text-align: left; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .fc-inner { grid-template-columns: 1fr; }
+  .fc-content { border-right: none; border-bottom: 1px solid var(--border); }
+  .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 600px) {
+  section { padding: 4rem 5vw; }
+  .hero-name { font-size: 3rem; }
+  .hero-stats { gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CZ — Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:zinyakatirachido29@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-main">
+    <div class="hero-eyebrow">Data Scientist &amp; Analyst — Available Immediately</div>
+    <h1 class="hero-name">Chido<br><span class="accent">Zinyakatira</span></h1>
+    <p class="hero-tagline">Econometric foundation. Machine learning specialisation. Production-ready pipelines from raw data to boardroom insight.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-navy">View Projects</a>
+      <a href="Chido_Zinyakatira_CV_4.pdf" class="btn-outline" target="_blank">Download CV</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">131/766</div>
+      <div class="hero-stat-label">Zindi Global Rank<br>Top 17%</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">75%</div>
+      <div class="hero-stat-label">Honours Distinction<br>Data Science</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">15+</div>
+      <div class="hero-stat-label">Portfolio<br>Projects</div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div>scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-hdr">
+    <div><div class="s-label">01 — About</div><h2 class="s-title">The analyst<br>behind the data</h2></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Data Scientist</strong> based in Harare, Zimbabwe, with a dual foundation in <strong>Economic Science (Wits)</strong> and <strong>Data Science Honours with Distinction (Eduvos)</strong>. My work sits at the intersection of rigorous statistical modelling and production-grade engineering.</p>
+      <p>Nine months of professional experience at a <strong>FAIS-regulated financial services firm</strong> taught me how data work lives or dies by its compliance, auditability, and communication -- not just its accuracy.</p>
+      <p>I've competed globally on Zindi, reaching <strong>top 17%</strong> (131/766) in Financial Health ML. I build pipelines that run, dashboards that get used, and models that inform decisions that matter.</p>
+      <p>Seeking fully remote, global roles. Available immediately.</p>
+    </div>
+    <div>
+      <div class="meta-row"><div class="meta-key">Location</div><div class="meta-val">Harare, Zimbabwe (Remote)</div></div>
+      <div class="meta-row"><div class="meta-key">Email</div><div class="meta-val"><a href="mailto:zinyakatirachido29@gmail.com">zinyakatirachido29@gmail.com</a></div></div>
+      <div class="meta-row"><div class="meta-key">LinkedIn</div><div class="meta-val"><a href="https://linkedin.com/in/chido-zinyakatira-327246255" target="_blank">chido-zinyakatira</a></div></div>
+      <div class="meta-row"><div class="meta-key">GitHub</div><div class="meta-val"><a href="https://github.com/chidozinyakatira" target="_blank">chidozinyakatira</a></div></div>
+      <div class="meta-row"><div class="meta-key">Portfolio</div><div class="meta-val"><a href="https://chidozinyakatira.github.io/chidozinyakatira" target="_blank">chidozinyakatira.github.io</a></div></div>
+      <div class="meta-row"><div class="meta-key">Availability</div><div class="meta-val">Immediate</div></div>
+      <div class="meta-row"><div class="meta-key">Target Roles</div><div class="meta-val">Data Scientist · Data Analyst · Business Analyst</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-hdr">
+    <div><div class="s-label">02 — Skills</div><h2 class="s-title">Technical<br>arsenal</h2></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="sg-icon">🐍</div><div class="sg-title">Languages</div>
+      <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">SQL</span><span class="skill-tag">VBA</span><span class="skill-tag">HiveQL</span><span class="skill-tag">Pig Latin</span></div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🤖</div><div class="sg-title">Machine Learning</div>
+      <div class="skill-tags"><span class="skill-tag">XGBoost</span><span class="skill-tag">CatBoost</span><span class="skill-tag">Random Forest</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Optuna</span><span class="skill-tag">K-Means</span><span class="skill-tag">Logistic Regression</span><span class="skill-tag">Pseudo-labelling</span></div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">📊</div><div class="sg-title">Statistics &amp; Econometrics</div>
+      <div class="skill-tags"><span class="skill-tag">ARIMA / SARIMA</span><span class="skill-tag">ARCH / GARCH</span><span class="skill-tag">VECM</span><span class="skill-tag">Holt-Winters</span><span class="skill-tag">Causal Inference</span><span class="skill-tag">Hypothesis Testing</span><span class="skill-tag">Regression</span><span class="skill-tag">LDA / NLP</span></div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">☁️</div><div class="sg-title">Big Data &amp; Cloud</div>
+      <div class="skill-tags"><span class="skill-tag">Google BigQuery</span><span class="skill-tag">Apache Hadoop</span><span class="skill-tag">Apache Hive</span><span class="skill-tag">Apache Pig</span><span class="skill-tag">Apache Airflow</span><span class="skill-tag">dbt Cloud</span><span class="skill-tag">MADlib</span></div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">📈</div><div class="sg-title">BI &amp; Visualisation</div>
+      <div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">matplotlib</span><span class="skill-tag">ggplot2</span><span class="skill-tag">Excel Dashboards</span><span class="skill-tag">pyLDAvis</span></div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🛠️</div><div class="sg-title">Tools &amp; Workflow</div>
+      <div class="skill-tags"><span class="skill-tag">Git / GitHub</span><span class="skill-tag">Jupyter</span><span class="skill-tag">Docker</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">NLTK</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-hdr">
+    <div><div class="s-label">03 — Projects</div><h2 class="s-title">Selected<br>work</h2></div>
+    <a href="https://github.com/chidozinyakatira" class="sec-hdr-link" target="_blank">All on GitHub →</a>
+  </div>
+
+  <div class="feat-card">
+    <div class="fc-inner">
+      <div class="fc-content">
+        <div>
+          <div class="fc-num">Featured — 01</div>
+          <div style="margin:0.6rem 0"><span class="badge b-eng">Data Engineering</span></div>
+          <div class="fc-title">African Economic<br>Intelligence Pipeline</div>
+        </div>
+        <p class="fc-desc">A production-style data engineering pipeline ingesting World Bank economic indicators for 48 African countries -- transformed through dbt, orchestrated with Airflow 2.8, stored in BigQuery, and visualised in Power BI. Covers 24 years of data (~9K rows) across 8 indicators. Fully Dockerised.</p>
+        <div class="fc-meta">
+          <div class="fc-stack"><span class="stack-pill">Python</span><span class="stack-pill">BigQuery</span><span class="stack-pill">dbt Cloud</span><span class="stack-pill">Airflow 2.8</span><span class="stack-pill">Power BI</span><span class="stack-pill">Docker</span></div>
+          <div class="fc-links">
+            <a href="https://github.com/chidozinyakatira/african-econ-pipeline" class="plink" target="_blank">GitHub →</a>
+            <a href="https://chidozinyakatira.github.io/african-econ-pipeline/" class="plink" target="_blank">Live Site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="fc-visual">
+        <div class="vis-label">Pipeline Architecture</div>
+        <div class="pipeline">
+          <div class="pnode hi">World Bank<br>API</div><div class="parr">→</div>
+          <div class="pnode">Python<br>Ingest</div><div class="parr">→</div>
+          <div class="pnode hi">BigQuery</div><div class="parr">→</div>
+          <div class="pnode">dbt<br>Cloud</div><div class="parr">→</div>
+          <div class="pnode hi">Airflow</div><div class="parr">→</div>
+          <div class="pnode">Power<br>BI</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="pstat"><span class="pstat-k">Countries</span><span class="pstat-v">48 African nations</span></div>
+          <div class="pstat"><span class="pstat-k">Indicators</span><span class="pstat-v">8 economic metrics</span></div>
+          <div class="pstat"><span class="pstat-k">Time range</span><span class="pstat-v">2000 -- 2023</span></div>
+          <div class="pstat"><span class="pstat-k">Dataset</span><span class="pstat-v">~9,000 rows</span></div>
+          <div class="pstat"><span class="pstat-k">Infrastructure</span><span class="pstat-v">Dockerised</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feat-card">
+    <div class="fc-inner">
+      <div class="fc-content">
+        <div>
+          <div class="fc-num">Featured — 02</div>
+          <div style="margin:0.6rem 0"><span class="badge b-res">Honours Research · 92%</span></div>
+          <div class="fc-title">GDP Growth Forecasting<br>Under Economic Volatility</div>
+        </div>
+        <p class="fc-desc">Honours dissertation evaluating ARIMA, Holt's Exponential Smoothing, and VECM for forecasting GDP growth under extreme volatility. Uses Zimbabwe (2000--2023) as a natural experiment. Outputs: dissertation, journal paper, conference presentation.</p>
+        <div class="fc-meta">
+          <div class="fc-stack"><span class="stack-pill">Python</span><span class="stack-pill">ARIMA</span><span class="stack-pill">VECM</span><span class="stack-pill">Holt-Winters</span><span class="stack-pill">Diebold-Mariano</span></div>
+          <div class="fc-links">
+            <a href="https://github.com/chidozinyakatira/gdp-forecasting-economic-volatility" class="plink" target="_blank">GitHub →</a>
+            <a href="https://chidozinyakatira.github.io/gdp-forecasting-economic-volatility/" class="plink" target="_blank">Research Site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="fc-visual">
+        <div class="vis-label">Key Findings by Regime</div>
+        <div class="pstat"><span class="pstat-k">Stable periods</span><span class="pstat-v">Holt's best short-term</span></div>
+        <div class="pstat"><span class="pstat-k">Instability</span><span class="pstat-v">ARIMA most reliable</span></div>
+        <div class="pstat"><span class="pstat-k">VECM</span><span class="pstat-v">Fails when cointegration breaks</span></div>
+        <div class="pstat"><span class="pstat-k">Key finding</span><span class="pstat-v">No single model dominates</span></div>
+        <div class="pstat"><span class="pstat-k">Evaluation</span><span class="pstat-v">MAE, RMSE, MSE, MAPE</span></div>
+        <div class="pstat"><span class="pstat-k">Validation</span><span class="pstat-v">Diebold-Mariano · Wilcoxon</span></div>
+        <div class="pstat"><span class="pstat-k">Data</span><span class="pstat-v">Zimbabwe 2000 -- 2023</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-grid">
+    <div class="pcard">
+      <div class="pc-num">03</div>
+      <span class="badge b-cmp">Zindi · Top 17% · 131/766</span>
+      <div class="pc-title">Financial Health ML Prediction</div>
+      <div class="pc-tools">Python · XGBoost · Optuna · Pseudo-labelling</div>
+      <p class="pc-desc">Ensemble ML pipeline predicting financial behaviour from demographic and transaction data. Feature engineering, Optuna tuning, and pseudo-labelling reached global top 17%.</p>
+      <div class="pc-stack"><span class="stack-pill">XGBoost</span><span class="stack-pill">Optuna</span><span class="stack-pill">Scikit-learn</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">04</div>
+      <span class="badge b-cmp">Zindi · 103/388</span>
+      <div class="pc-title">DigiCow Farmer Tech Adoption</div>
+      <div class="pc-tools">Python · Classification · Feature Engineering</div>
+      <p class="pc-desc">Predicted technology adoption behaviour from structured demographic and engagement data for African smallholder farmers. Ranked 103/388 on Zindi.</p>
+      <div class="pc-stack"><span class="stack-pill">CatBoost</span><span class="stack-pill">Python</span><span class="stack-pill">Scikit-learn</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">05</div>
+      <div class="pc-title">Customer Segmentation Dashboard</div>
+      <div class="pc-tools">R · Tableau · K-Means Clustering</div>
+      <p class="pc-desc">K-Means clustering identifying 6 distinct customer segments from spending and income data. Interactive Tableau dashboard with gender-based spending analysis.</p>
+      <ul class="pc-finds"><li>Premium Young Professionals: highest spending potential</li><li>6 clusters with actionable segment profiles</li></ul>
+      <div class="pc-stack"><span class="stack-pill">R</span><span class="stack-pill">Tableau</span><span class="stack-pill">K-Means</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">06</div>
+      <div class="pc-title">Insurance Risk Analysis Dashboard</div>
+      <div class="pc-tools">R · Tableau · Statistical Analysis</div>
+      <p class="pc-desc">EDA and hypothesis testing on 1,338 insurance records to identify key demographic risk factors affecting policy pricing. Interactive Tableau dashboard.</p>
+      <ul class="pc-finds"><li>Identified high-risk customer segments</li><li>Improved risk assessment via statistical modelling</li></ul>
+      <div class="pc-stack"><span class="stack-pill">R</span><span class="stack-pill">Tableau</span><span class="stack-pill">ggplot2</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">07</div>
+      <div class="pc-title">Programming Language Popularity Forecasting</div>
+      <div class="pc-tools">Python · SARIMA · Time Series</div>
+      <p class="pc-desc">Forecasts popularity trends for C++, Java, and Python using SARIMA. ADF stationarity tests, seasonal decomposition, 12-week out-of-sample validation.</p>
+      <ul class="pc-finds"><li>SARIMA(1,1,1)(1,1,1,52) for C++ and Python</li><li>SARIMA(2,1,1)(1,1,1,52) for Java</li></ul>
+      <div class="pc-stack"><span class="stack-pill">Python</span><span class="stack-pill">SARIMA</span><span class="stack-pill">statsmodels</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">08</div>
+      <div class="pc-title">Online Retail Revenue Analysis</div>
+      <div class="pc-tools">Hadoop · MapReduce · R · ggplot2</div>
+      <p class="pc-desc">Distributed analysis of 2009--2011 UK retail sales using HDFS and MapReduce (R). Revenue-per-country ranking to support international expansion decisions.</p>
+      <ul class="pc-finds"><li>Revenue concentrated in European markets</li><li>Scalable MapReduce pipeline on HDFS</li></ul>
+      <div class="pc-stack"><span class="stack-pill">Hadoop</span><span class="stack-pill">MapReduce</span><span class="stack-pill">R</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">09</div>
+      <div class="pc-title">Product Demand Categorisation</div>
+      <div class="pc-tools">Apache Hive · UDF · Big Data</div>
+      <p class="pc-desc">Classified products into High / Medium / Low demand tiers using distributed SQL in Hive. Custom Hive UDF on aggregated transactional data for inventory decisions.</p>
+      <div class="pc-stack"><span class="stack-pill">Hive</span><span class="stack-pill">HDFS</span><span class="stack-pill">HiveQL</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">10</div>
+      <div class="pc-title">Customer Feedback Text Pattern Analysis</div>
+      <div class="pc-tools">Apache Pig · Hive · NLP</div>
+      <p class="pc-desc">Analysed Amazon product reviews to uncover complaint patterns. Used Pig to filter non-neutral reviews, tokenise, and compute word frequencies. Top-10 keywords via Hive views.</p>
+      <div class="pc-stack"><span class="stack-pill">Pig</span><span class="stack-pill">Hive</span><span class="stack-pill">HDFS</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">11</div>
+      <div class="pc-title">Customer Churn Modelling</div>
+      <div class="pc-tools">PostgreSQL · MADlib · Logistic Regression</div>
+      <p class="pc-desc">In-database churn prediction for a telecom provider using MADlib logistic regression on PostgreSQL. Identifies short-tenure flexible-contract customers as highest churn risk.</p>
+      <ul class="pc-finds"><li>Higher charges linked to higher churn probability</li><li>Long-term contracts significantly reduce churn</li></ul>
+      <div class="pc-stack"><span class="stack-pill">PostgreSQL</span><span class="stack-pill">MADlib</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">12</div>
+      <div class="pc-title">Tourist Arrivals Forecasting</div>
+      <div class="pc-tools">Python · SARIMA · Holt-Winters</div>
+      <p class="pc-desc">Compared Holt-Winters and SARIMA for forecasting monthly lodge arrivals (2001--2020). SARIMA outperforms on residual diagnostics. 12-month forecasts for operational planning.</p>
+      <div class="pc-stack"><span class="stack-pill">Python</span><span class="stack-pill">SARIMA</span><span class="stack-pill">statsmodels</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">13</div>
+      <div class="pc-title">Stock Volatility Forecasting (ARCH/GARCH)</div>
+      <div class="pc-tools">Python · ARCH · GARCH · Financial Time Series</div>
+      <p class="pc-desc">Models stock return volatility using ARCH(1), ARCH(2), and GARCH(1,1). GARCH outperforms by capturing long-run persistence. Validated with Ljung-Box and Engle ARCH diagnostics.</p>
+      <ul class="pc-finds"><li>GARCH(1,1) best for volatility clustering</li><li>Supports risk-adjusted investment decisions</li></ul>
+      <div class="pc-stack"><span class="stack-pill">Python</span><span class="stack-pill">arch</span><span class="stack-pill">statsmodels</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">14</div>
+      <div class="pc-title">Course Recommendation System</div>
+      <div class="pc-tools">Python · TF-IDF · Cosine Similarity</div>
+      <p class="pc-desc">Text-based career recommender mapping learner narratives to course categories. TF-IDF vectorisation, class imbalance handling, 5-fold CV model selection, cosine similarity top-10 output.</p>
+      <div class="pc-stack"><span class="stack-pill">Python</span><span class="stack-pill">TF-IDF</span><span class="stack-pill">Scikit-learn</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pc-num">15</div>
+      <div class="pc-title">News Topic Modelling (NLP + LDA)</div>
+      <div class="pc-tools">Python · BeautifulSoup · LDA · pyLDAvis</div>
+      <p class="pc-desc">Scraped 10 News24 articles, cleaned text, computed TF-IDF, and extracted 4 dominant topics via LDA. Sentiment polarity per article. Topic overlap visualised with pyLDAvis.</p>
+      <div class="pc-stack"><span class="stack-pill">Python</span><span class="stack-pill">LDA</span><span class="stack-pill">pyLDAvis</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-hdr">
+    <div><div class="s-label">04 — Experience</div><h2 class="s-title">Professional<br>history</h2></div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-date"><strong>Apr 2025 -- Dec 2025</strong>Johannesburg, ZA<br>FAIS-regulated</div>
+    <div>
+      <div class="exp-role">Data &amp; Analytics Analyst</div>
+      <div class="exp-co">Finhealth Risk Solutions (Pty) Ltd — FSP 53434</div>
+      <ul class="exp-list">
+        <li>Built SQL/Python ETL pipelines consolidating multi-source financial data; automated anomaly detection reduced policy lapses by 15% through proactive risk flagging</li>
+        <li>Designed FSCA-aligned compliance monitoring dashboards in Tableau and Excel, replacing manual workflows and cutting reporting time significantly</li>
+        <li>Performed regression and time series analysis on 60+ client portfolios; translated findings into structured management reports and client-facing recommendations</li>
+        <li>Built a six-sheet FAIS compliance tracker (Excel, 161 formulas, conditional formatting) and commission dashboard covering 10 insurers across Sep 2024 -- Feb 2026</li>
+        <li>Automated commission reconciliation pipeline (Python/Jupyter) with PDF/Excel/text ingestion, insurer detection, and FAIS s.13B concentration flagging in under 10 minutes</li>
+        <li>Maintained full audit trail documentation aligned with FSCA regulatory standards</li>
+      </ul>
+    </div>
+  </div>
+  <div class="exp-item">
+    <div class="exp-date"><strong>Jan 2024 -- Feb 2024</strong>Johannesburg, ZA</div>
+    <div>
+      <div class="exp-role">Business Operations Intern</div>
+      <div class="exp-co">Safeway Risk Solutions</div>
+      <ul class="exp-list">
+        <li>Maintained 99% data accuracy across 200+ client records through systematic validation and QA processes</li>
+        <li>Supported operational reporting workflows within a financial services environment</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-hdr">
+    <div><div class="s-label">05 — Education</div><h2 class="s-title">Academic<br>foundation</h2></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-inst">Eduvos</div>
+      <div class="edu-deg">BSc Honours, Data Science</div>
+      <div class="edu-period">Completed Dec 2025 · Ceremony May 12 2026</div>
+      <div class="edu-badge">Distinction — 75%</div>
+      <ul class="edu-list">
+        <li>Research Project: GDP Forecasting &amp; Economic Volatility — 92%</li>
+        <li>Big Data Analytics — 82%</li>
+        <li>Machine Learning — 72%</li>
+        <li>Journal paper &amp; conference presentation from research</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-inst">University of the Witwatersrand</div>
+      <div class="edu-deg">BSc Economic Science</div>
+      <div class="edu-period">2022 -- 2024</div>
+      <ul class="edu-list">
+        <li>Economics &amp; Computational Applied Mathematics</li>
+        <li>Econometrics III</li>
+        <li>Mathematical Statistics II</li>
+        <li>Macroeconomics III</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="sec-hdr">
+    <div><div class="s-label">06 — Certifications</div><h2 class="s-title">Credentials &amp;<br>recognition</h2></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-issuer">Google</div><div class="cert-name">Data Analytics Professional Certificate</div><div class="cert-date">March 2026 · Credential: U7DDIMW4DKBD</div></div>
+    <div class="cert-card"><div class="cert-issuer">HackerRank</div><div class="cert-name">SQL Intermediate</div><div class="cert-date">Verified</div></div>
+    <div class="cert-card"><div class="cert-issuer">HackerRank</div><div class="cert-name">SQL Advanced</div><div class="cert-date">Verified</div></div>
+    <div class="cert-card"><div class="cert-issuer">HackerRank</div><div class="cert-name">Python Basic</div><div class="cert-date">Verified</div></div>
+    <div class="cert-card"><div class="cert-issuer">HackerRank</div><div class="cert-name">R Basic</div><div class="cert-date">Verified</div></div>
+    <div class="cert-card"><div class="cert-issuer">data.org</div><div class="cert-name">Ethical AI in Practice</div><div class="cert-date">Verified</div></div>
+    <div class="cert-card"><div class="cert-issuer">Zindi · Global Competition</div><div class="cert-name">Financial Health Prediction — Rank 131/766</div><div class="cert-date">Top 17% Globally</div></div>
+    <div class="cert-card"><div class="cert-issuer">Zindi · Global Competition</div><div class="cert-name">DigiCow Farmer Adoption — Rank 103/388</div><div class="cert-date">Top 27% Globally</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-hdr">
+    <div><div class="s-label">07 — Contact</div><h2 class="s-title">Let's build<br>something</h2></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p>I'm actively seeking fully remote roles in data science, data analysis, and business analytics -- junior to mid-level. I move fast, write clean code, and communicate results clearly.</p>
+      <p>If you're building something data-driven and need someone who understands both the statistics and the system -- let's talk.</p>
+      <div class="contact-btns">
+        <a href="mailto:zinyakatirachido29@gmail.com" class="btn-navy">Send Email</a>
+        <a href="Chido_Zinyakatira_CV_4.pdf" class="btn-outline" target="_blank">Download CV</a>
+      </div>
+    </div>
+    <div class="clinks">
+      <a class="clink" href="mailto:zinyakatirachido29@gmail.com"><div class="clink-left"><div class="clink-lbl">Email</div><div class="clink-val">zinyakatirachido29@gmail.com</div></div><span class="clink-arr">→</span></a>
+      <a class="clink" href="https://linkedin.com/in/chido-zinyakatira-327246255" target="_blank"><div class="clink-left"><div class="clink-lbl">LinkedIn</div><div class="clink-val">chido-zinyakatira-327246255</div></div><span class="clink-arr">→</span></a>
+      <a class="clink" href="https://github.com/chidozinyakatira" target="_blank"><div class="clink-left"><div class="clink-lbl">GitHub</div><div class="clink-val">github.com/chidozinyakatira</div></div><span class="clink-arr">→</span></a>
+      <a class="clink" href="https://chidozinyakatira.github.io/african-econ-pipeline/" target="_blank"><div class="clink-left"><div class="clink-lbl">Featured Project</div><div class="clink-val">African Economic Intelligence Pipeline</div></div><span class="clink-arr">→</span></a>
+      <a class="clink" href="https://chidozinyakatira.github.io/gdp-forecasting-economic-volatility/" target="_blank"><div class="clink-left"><div class="clink-lbl">Honours Research</div><div class="clink-val">GDP Growth Forecasting Under Economic Volatility</div></div><span class="clink-arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Chido Zinyakatira — Data Scientist</div>
+  <div class="footer-links">
+    <a href="https://github.com/chidozinyakatira" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/chido-zinyakatira-327246255" target="_blank">LinkedIn</a>
+    <a href="mailto:zinyakatirachido29@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--navy)' : ''; });
+}, { passive: true });
+</script>
+</body>
+</html>
